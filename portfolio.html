@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #15033f;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #007bff;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background-color: black;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 50%;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tagline {
+            font-size: 18px;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .name {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .description {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 600px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        
+        .btn-outline {
+            border: 2px solid #007bff;
+            color: #007bff;
+            background-color: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* New sections styling */
+        section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #skills, #education {
+            opacity: 0;
+            transform: translateY(30px);
+            animation-fill-mode: forwards;
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+        }
+
+        #skills.visible, #education.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #skills h2, #education h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: darkblue;
+            border-bottom: 3px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        #skills ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        #skills ul li {
+            background-color: #007bff;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        #skills ul li:hover {
+            background-color: #0056b3;
+        }
+
+        #education ul {
+            list-style: none;
+            max-width: 700px;
+        }
+
+        #education ul li {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #007bff;
+            position: relative;
+        }
+
+        #education ul li::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            border-radius: 50%;
+        }
+
+        #education ul li .date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">portofolio</div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="tagline">Front End Developer</p>
+                    <h1 class="name">philip sinto</h1>
+                    <p class="description">
+                        Halo! Saya adalah philip sinto, seorang programmer yang senang mengeksplorasi dunia pengembangan web.
+                        <br> Saya percaya bahwa setiap desain harus fungsional dan estetis.<br>
+                        Di waktu luang, saya suka menonton video tentang coding. 
+                    </p>
+                    <div class="buttons">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="#" class="btn btn-outline">Hire Me</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="gambar 1 .png" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <ul>
+                <li>JavaScript (ES6+)</li>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>Git & GitHub</li>
+                <li>Responsive Design</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2>Education & Training</h2>
+            <ul>
+                <li>
+                    <div class="date">2022 - 2025</div>
+                    <div>basic under standing of programming</div>
+                </li>
+                <li>
+                    <div class="date">2023</div>
+                    <div>Front End Development</div>
+                </li>
+                <li>
+                    <div class="date">2024</div>
+                    <div>basic JavaScript Course</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        // Simple animation on scroll to reveal sections
+        function revealOnScroll() {
+            const skills = document.getElementById('skills');
+            const education = document.getElementById('education');
+            const windowHeight = window.innerHeight;
+            const revealPoint = 150;
+
+            [skills, education].forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < windowHeight - revealPoint) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>
